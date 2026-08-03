@@ -12,9 +12,7 @@ Two-stage pipeline on 2D Navier-Stokes:
    over the frozen Stage-1 codebook; the frozen decoder turns generated latents back into
    velocity fields.
 
-Structure follows [NO-stresstesting](https://github.com/AmiteshPuri/NO-stresstesting)'s
-conventions: OmegaConf configs, a name-based registry, callback-driven training, atomic
-checkpoint writes, a `run.py` orchestrator, and a fast CPU `smoke_test.py`.
+
 
 ## Quick start
 
@@ -32,8 +30,7 @@ python run.py --stage all --data_config data_pdebench   # after setting file_pat
 python run.py --stage all --data_config data_the_well    # after downloading with the-well-download
 ```
 
-Every stage is resumable: interrupt and re-run the same command, and it continues from the
-last checkpoint rather than restarting (see [Resuming](#resuming--checkpoints)).
+
 
 ## Repository layout
 
@@ -56,8 +53,7 @@ smoke_test.py          fast end-to-end verification, tiny grid, no GPU/download
 | Source | Config | Boundary condition | Notes |
 |---|---|---|---|
 | Synthetic (default) | `data_synthetic.yaml` | Periodic | A real pseudospectral 2D NS solver (vorticity form, Lie-split diffusion/advection). No download; used by `smoke_test.py`. Not a substitute for real data in the actual comparison. |
-| PDEBench | `data_pdebench.yaml` | **Dirichlet** | Incompressible NS, generated with PhiFlow. Download from [darus.uni-stuttgart.de](https://darus.uni-stuttgart.de) (doi:10.18419/darus-2986). Field key names vary by file version -- run `data.pdebench_loader.inspect_file(path)` and set `velocity_key`/`x_key`/`y_key` if auto-detection fails. |
-| The Well | `data_the_well.yaml` | Periodic | `pip install the_well`. Default dataset `shear_flow` is explicitly 2D-periodic incompressible NS (Ohana et al. 2024); `turbulent_radiative_layer_2D` is smaller/faster. Channel ordering is dataset-specific -- run `data.the_well_loader.inspect_dataset(...)` and set `velocity_channels` if the default `[0, 1]` is wrong. |
+
 
 **The periodic-vs-Dirichlet distinction is not cosmetic.** The physics residual can be computed
 two ways (`physics/derivatives.py`): spectral (FFT), exact for periodic domains, or

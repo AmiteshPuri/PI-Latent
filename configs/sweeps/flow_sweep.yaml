@@ -1,0 +1,15 @@
+# Grid sweep for Stage 2. Run with:
+#   python scripts/run_sweep.py --sweep configs/sweeps/flow_sweep.yaml --stage flow
+#
+# n_ode_steps sweeps the flow-matching NFE-vs-quality trade-off directly
+# (see models/flow_matching/model.py's sample()); vqvae_checkpoint lets
+# the same sweep cover flow matchers built on different Stage-1 runs
+# (e.g. baseline vs physics-informed, or different datasets), which is
+# the natural way to compare "does a physics-informed VQ-VAE produce a
+# better generative substrate" once Stage 1 has produced both checkpoints.
+
+grid:
+  eval.n_ode_steps: [10, 25, 50, 100]
+  vqvae_checkpoint:
+    - outputs/checkpoints/ns2d_vqvae_synthetic_baseline/best.pt
+    - outputs/checkpoints/ns2d_vqvae_synthetic_physics/best.pt

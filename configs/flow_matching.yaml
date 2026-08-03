@@ -1,0 +1,30 @@
+# Stage 2: latent Flow Matching over a frozen Stage-1 VQ-VAE.
+# vqvae_checkpoint/vqvae_config must point at a completed Stage-1 run --
+# run.py --stage train_flow checks this and errors clearly if missing.
+
+run_name: ns2d_flow_matching
+
+# Default assumes the standard `python scripts/train_vqvae.py --data_config data_synthetic
+# --vqvae_config vqvae_physics` run, whose auto-generated run_name is
+# ns2d_vqvae_<data_tag>_<vqvae_tag>. Update this (or pass --override
+# vqvae_checkpoint=...) if you trained Stage 1 on a different dataset.
+vqvae_checkpoint: outputs/checkpoints/ns2d_vqvae_synthetic_physics/best.pt
+vqvae_config: vqvae_physics   # must match the architecture the checkpoint was trained with
+
+embed_dim: 128
+depth: 6
+n_heads: 4
+mlp_ratio: 4.0
+dropout: 0.0
+
+epochs: 80
+lr: 2.0e-4
+weight_decay: 1.0e-4
+grad_clip: 1.0
+use_amp: true
+checkpoint_epochs: [20, 40, 60]
+
+eval:
+  n_samples: 256
+  n_ode_steps: 50     # NFE for Euler integration; the flow-matching NFE-vs-quality knob
+  ode_method: euler     # 'heun' for the 2nd-order option (2x cost per step) in NFE ablations

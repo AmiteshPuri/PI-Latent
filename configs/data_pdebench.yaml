@@ -1,0 +1,24 @@
+# PDEBench 2D incompressible Navier-Stokes (Dirichlet BC -- see
+# physics/derivatives.py's backend note; periodic is NOT set here because
+# data/pdebench_loader.py always returns periodic=False for this source).
+#
+# Download from https://darus.uni-stuttgart.de (doi:10.18419/darus-2986)
+# and point file_path at the .h5 file.
+
+source: pdebench
+
+file_path: data/raw/pdebench_ns_incompressible.h5
+
+# Leave these null to auto-detect common key names; set them if
+# data.pdebench_loader.inspect_file(file_path) shows a different layout.
+velocity_key: null
+x_key: null
+y_key: null
+
+window_stride: 1          # timesteps between the stored prev/center/next frames
+dx: null                   # null -> defaults to 1/resolution
+dt: null                   # null -> defaults to 1.0; set to the file's actual timestep if known
+nu: null                   # null -> tries HDF5 attrs (nu_attr_names below), else falls back to 1e-3
+nu_attr_names: [nu, viscosity, eta]
+
+split_fractions: {train: 0.8, val: 0.1, test: 0.1}

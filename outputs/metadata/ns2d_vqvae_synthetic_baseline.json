@@ -1,0 +1,58 @@
+{
+  "run_name": "ns2d_vqvae_synthetic_baseline",
+  "config": {
+    "seed": 42,
+    "output_dir": "outputs",
+    "run_name": "ns2d_vqvae",
+    "data_root": "data",
+    "resolution": 64,
+    "batch_size": 16,
+    "num_workers": 0,
+    "epochs": 60,
+    "lr": 0.0003,
+    "weight_decay": 0.0001,
+    "grad_clip": 1.0,
+    "use_amp": true,
+    "checkpoint_epochs": [
+      10,
+      20,
+      30,
+      40,
+      50
+    ],
+    "n_windows": {
+      "train": 4000,
+      "val": 500,
+      "test": 500
+    },
+    "data": {
+      "source": "synthetic",
+      "dt": 0.01,
+      "nu": 0.001,
+      "window_stride": 4
+    },
+    "vqvae": {
+      "physics_weight": 0.0,
+      "in_channels": 2,
+      "patch_size": 8,
+      "embed_dim": 128,
+      "encoder_depth": 4,
+      "decoder_depth": 4,
+      "n_heads": 4,
+      "mlp_ratio": 4.0,
+      "num_codes": 512,
+      "code_dim": null,
+      "commitment_weight": 0.25,
+      "ema_decay": 0.99,
+      "reset_after_n_batches": 50,
+      "dropout": 0.0,
+      "divergence_weight": 1.0,
+      "residual_weight": 1.0,
+      "boundary_margin": 2
+    }
+  },
+  "device": "cuda",
+  "cuda_version": "12.4",
+  "gpu_name": "NVIDIA GeForce GTX 1650",
+  "gpu_total_memory_gb": 4.0
+}

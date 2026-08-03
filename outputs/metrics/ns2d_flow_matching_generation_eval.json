@@ -1,0 +1,9 @@
+{
+  "run_name": "ns2d_flow_matching",
+  "mmd": 0.18316568434238434,
+  "sliced_wasserstein_distance": 0.03325782319881214,
+  "spectral_energy_error": 1.6848156334357542,
+  "pde_residual_norm_generated_mean": 2.7169253826141357,
+  "pde_residual_norm_real_mean": 2.3652191162109375,
+  "divergence_error_generated_mean": 0.4219719469547272
+}

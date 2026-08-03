@@ -1,0 +1,25 @@
+# Baseline variant: architecture identical to vqvae_physics.yaml.
+# physics_weight: 0.0 is the ONLY difference -- see training/losses.py's
+# VQVAELossComputer. The physics residual is still computed and logged
+# every epoch (for a fair comparison against the physics-informed run in
+# TensorBoard) but never backpropagated.
+
+physics_weight: 0.0
+
+in_channels: 2
+patch_size: 8          # 64/8 = 8x8 = 64 tokens at the default 64x64 resolution
+embed_dim: 128
+encoder_depth: 4
+decoder_depth: 4
+n_heads: 4
+mlp_ratio: 4.0
+num_codes: 512
+code_dim: null           # null -> defaults to embed_dim
+commitment_weight: 0.25
+ema_decay: 0.99
+reset_after_n_batches: 50
+dropout: 0.0
+
+divergence_weight: 1.0   # relative weight within the (diagnostic-only, for baseline) physics loss
+residual_weight: 1.0
+boundary_margin: 2         # pixels excluded at each edge for non-periodic (PDEBench) data

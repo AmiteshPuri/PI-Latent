@@ -1,0 +1,25 @@
+# Master experiment config, merged with a data_*.yaml and a vqvae_*.yaml
+# by utils/config.py's load_experiment_configs(). Sweep overrides (see
+# configs/sweeps/) are applied last and take priority over everything here.
+
+seed: 42
+output_dir: outputs
+run_name: ns2d_vqvae
+
+data_root: data
+resolution: 64        # 64x64; safe for a 4 GB GPU with the default vqvae_*.yaml model size.
+batch_size: 16         # drop to 8 if you get OOM on a 4 GB GPU.
+num_workers: 0          # 0 is the safe default on Windows (avoids multiprocessing DataLoader issues).
+
+epochs: 60
+lr: 3.0e-4
+weight_decay: 1.0e-4
+grad_clip: 1.0
+use_amp: true            # fp16 mixed precision; only takes effect on CUDA.
+
+checkpoint_epochs: [10, 20, 30, 40, 50]   # extra snapshots kept for later ablation, beyond best.pt/latest.pt
+
+n_windows:               # (prev, center, next) windows per split, for data generation
+  train: 4000
+  val: 500
+  test: 500

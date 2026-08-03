@@ -1,0 +1,20 @@
+# Grid sweep for Stage 1. Run with:
+#   python scripts/run_sweep.py --sweep configs/sweeps/vqvae_sweep.yaml --stage vqvae
+#
+# Every combination gets its own run_name (auto-generated from the swept
+# values) and its own checkpoint directory, so results are directly
+# comparable and nothing overwrites another run. Each combination is
+# skip-aware: a combination whose run already reached the target epoch
+# count is skipped; a partially-completed one is resumed, not restarted.
+#
+# Keys under `grid` are dot-paths into the merged experiment config
+# (see utils/config.py's load_experiment_configs) -- e.g. 'vqvae.
+# physics_weight' overrides cfg.vqvae.physics_weight for that run.
+
+base_data: data_synthetic     # overridden per-combination by the data_config axis below
+base_vqvae: vqvae_physics     # overridden per-combination by the vqvae.physics_weight axis below
+
+grid:
+  data_config: [data_synthetic, data_pdebench, data_the_well]
+  vqvae.physics_weight: [0.0, 0.1, 0.5]
+  vqvae.num_codes: [512]   # single value here by default; add e.g. 256, 1024 for a codebook-size ablation

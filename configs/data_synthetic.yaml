@@ -1,0 +1,11 @@
+# No-download fallback: a real (if simplified) pseudospectral 2D NS
+# solver -- see data/synthetic_solver.py. Used by smoke_test.py and
+# useful if a PDEBench/The Well download is not available. Always
+# periodic=True (the solver assumes a periodic domain).
+
+source: synthetic
+
+dt: 0.01
+nu: 0.001
+window_stride: 4    # solver steps between the stored prev/center/next frames
+# dx defaults to 2*pi/resolution (periodic domain of circumference 2*pi), computed automatically.

@@ -1,0 +1,28 @@
+# Physics-informed variant: architecture identical to vqvae_baseline.yaml.
+# physics_weight > 0.0 is the ONLY difference.
+#
+# Start conservative and watch TensorBoard: train/physics_loss should be
+# O(1) (it is scale-normalised, see training/losses.py) -- if
+# metrics/divergence_error and metrics/residual_norm stay high while
+# reconstruction_loss is healthy, raise physics_weight; if reconstruction
+# quality degrades noticeably relative to the baseline run, lower it.
+
+physics_weight: 0.1
+
+in_channels: 2
+patch_size: 8
+embed_dim: 128
+encoder_depth: 4
+decoder_depth: 4
+n_heads: 4
+mlp_ratio: 4.0
+num_codes: 512
+code_dim: null
+commitment_weight: 0.25
+ema_decay: 0.99
+reset_after_n_batches: 50
+dropout: 0.0
+
+divergence_weight: 1.0
+residual_weight: 1.0
+boundary_margin: 2

@@ -1,0 +1,41 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.Python
+*.egg-info/
+dist/
+build/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+
+# Generated large files -- do not commit
+data/*.npz
+data/raw/
+outputs/checkpoints/**/*.pt
+outputs/tensorboard/**
+outputs/smoke_test_tmp/
+
+# Keep directory scaffolding
+!data/.gitkeep
+!outputs/checkpoints/.gitkeep
+!outputs/metrics/.gitkeep
+!outputs/figures/.gitkeep
+!outputs/metadata/.gitkeep
+!outputs/tensorboard/.gitkeep
+
+# IDEs / OS
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log

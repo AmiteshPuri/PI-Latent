@@ -1,0 +1,24 @@
+# Polymathic AI's "The Well" dataset collection (pip install the_well).
+# shear_flow is explicitly 2D-periodic incompressible Navier-Stokes
+# (Ohana et al. 2024) -- periodic=True is hard-coded for this source in
+# data/the_well_loader.py. turbulent_radiative_layer_2D is the smallest
+# Well dataset if you just want to exercise the pipeline faster.
+#
+# Download with:
+#   the-well-download --base-path data/raw/the_well --dataset shear_flow --split train
+# (repeat with --split valid and --split test), or point well_base_path
+# at an hf:// URL to stream -- see the_well's README.
+
+source: the_well
+
+well_base_path: data/raw/the_well
+dataset_name: shear_flow
+
+# [0, 1] assumes velocity is the first 2 channels -- confirm with
+# data.the_well_loader.inspect_dataset(well_base_path, dataset_name) and
+# override if this dataset's field ordering differs.
+velocity_channels: [0, 1]
+
+dx: null    # null -> estimated from the stored space_grid
+dt: null    # null -> estimated from the stored time_grid
+nu: null    # set explicitly for an accurate physics loss -- see loader docstring

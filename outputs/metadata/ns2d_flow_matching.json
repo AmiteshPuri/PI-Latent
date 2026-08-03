@@ -1,0 +1,29 @@
+{
+  "run_name": "ns2d_flow_matching",
+  "vqvae_checkpoint": "outputs\\checkpoints\\ns2d_vqvae_synthetic_physics\\best.pt",
+  "config": {
+    "run_name": "ns2d_flow_matching",
+    "vqvae_checkpoint": "outputs/checkpoints/ns2d_vqvae_synthetic_physics/best.pt",
+    "vqvae_config": "vqvae_physics",
+    "embed_dim": 128,
+    "depth": 6,
+    "n_heads": 4,
+    "mlp_ratio": 4.0,
+    "dropout": 0.0,
+    "epochs": 80,
+    "lr": 0.0002,
+    "weight_decay": 0.0001,
+    "grad_clip": 1.0,
+    "use_amp": true,
+    "checkpoint_epochs": [
+      20,
+      40,
+      60
+    ],
+    "eval": {
+      "n_samples": 256,
+      "n_ode_steps": 50,
+      "ode_method": "euler"
+    }
+  }
+}

@@ -1,0 +1,20 @@
+torch>=2.0.0
+numpy>=1.24.0
+scipy>=1.10.0
+matplotlib>=3.7.0
+pandas>=2.0.0
+pyyaml>=6.0
+omegaconf>=2.3.0
+tqdm>=4.65.0
+scikit-learn>=1.3.0
+tensorboard>=2.14.0
+
+# Notebook (notebooks/final_analysis.ipynb, build_notebook.py)
+nbformat>=5.9.0
+nbconvert>=7.7.0
+jupyter>=1.0.0
+ipykernel>=6.25.0
+
+# Optional, only needed for the corresponding data source (configs/data_*.yaml):
+# h5py>=3.9.0        # data_pdebench.yaml
+# the_well            # data_the_well.yaml -- pip install the_well
